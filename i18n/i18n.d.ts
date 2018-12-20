@@ -1,6 +1,6 @@
 /**
  * I18n reference
- * @author hidari@netjapan.co.jp
+ * @author zuojiazi@vip.qq.com
  */
 
 declare namespace I18n {
