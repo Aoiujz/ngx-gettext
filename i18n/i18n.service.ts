@@ -3,6 +3,8 @@
  * @author zuojiazi@vip.qq.com
  */
 
+/// <reference path="i18n.d.ts" />
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { vsprintf } from 'sprintf-js';
