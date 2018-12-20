@@ -39,6 +39,8 @@ export class I18nDirective implements OnInit, OnDestroy {
     ngOnInit() {
         const msgid = this.getMsgid();
 
+        console.log(this.n);
+
         if (this.n && !/\d+/.test(this.n)) {
             throw new Error('Attribute "i18n-n" must be a numeric string');
         }
