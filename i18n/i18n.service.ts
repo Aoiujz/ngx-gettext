@@ -19,7 +19,7 @@ export class I18nService {
     readonly onLanguageChange = new BehaviorSubject<string>(this.current);
 
     get languages() {
-        return this.packages.get(this.current);
+        return this.packages.get(this.current) || {};
     }
 
     constructor() {
