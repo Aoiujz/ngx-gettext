@@ -1,6 +1,6 @@
 /**
  * I18n Service
- * @author hidari@netjapan.co.jp
+ * @author zuojiazi@vip.qq.com
  */
 
 import { Injectable } from '@angular/core';

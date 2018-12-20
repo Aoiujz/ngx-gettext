@@ -1,6 +1,6 @@
 /**
  * I18n Module
- * @author hidari@netjapan.co.jp
+ * @author zuojiazi@vip.qq.com
  */
 
 import { NgModule } from '@angular/core';

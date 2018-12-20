@@ -1,12 +1,11 @@
 /**
  * I18n Directive
- * @author hidari@netjapan.co.jp
+ * @author zuojiazi@vip.qq.com
  */
 
 import { Directive, ElementRef, OnInit, Input } from '@angular/core';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
     selector: '[i18ns]',
 })
 export class I18nDirective implements OnInit {
