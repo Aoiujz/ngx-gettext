@@ -27,16 +27,14 @@ export class I18nService {
     }
 
     get(key: string, args: any[] = [], context = DEFAULT_CTX) {
-        const messages = this.languages[context] ? this.languages[context][key] : key;
-
-        return vsprintf(Array.isArray(messages) ? messages[0] : messages, args);
+        const translated = this.getTranslated(key, context) || key;
+        return vsprintf(Array.isArray(translated) ? translated[0] : translated, args);
     }
 
     plural(n: number, key: string, plural: string, args: any[], context = DEFAULT_CTX) {
         const index = n === 1 ? 0 : 1;
-        const messages = this.languages[context] ? this.languages[context][key] : key;
-
-        return vsprintf(Array.isArray(messages) ? messages[index] : messages, args);
+        const translated = this.getTranslated(key, context) || [key, plural];
+        return vsprintf(Array.isArray(translated) ? translated[index] : translated, args);
     }
 
     async changeLanguage(lang: string) {
@@ -67,5 +65,9 @@ export class I18nService {
             this.packages.set(data.language, data.contexts);
             return lang;
         }
+    }
+
+    private getTranslated(key: string, ctx: string) {
+        return this.languages[ctx] ? this.languages[ctx][key] : null;
     }
 }
