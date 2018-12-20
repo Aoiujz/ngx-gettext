@@ -14,10 +14,10 @@ export class I18nDirective implements OnInit, OnDestroy {
     @Input()
     private i18ns: string;
 
-    @Input('i18ns-n')
+    @Input('aaa-n')
     private n: string;
 
-    @Input('i18n-plural')
+    @Input('aaa-plural')
     private plural: string;
 
     @Input('i18n-args')
