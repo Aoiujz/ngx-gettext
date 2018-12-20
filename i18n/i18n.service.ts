@@ -22,21 +22,25 @@ export class I18nService {
         return this.packages.get(this.current);
     }
 
+    constructor() {
+        this.changeLanguage(this.current);
+    }
+
     get(key: string, args: any[] = [], context = DEFAULT_CTX) {
-        const messages = this.languages[context][key];
+        const messages = this.languages[context] ? this.languages[context][key] : key;
 
         return vsprintf(Array.isArray(messages) ? messages[0] : messages, args);
     }
 
     plural(n: number, key: string, plural: string, args: any[], context = DEFAULT_CTX) {
         const index = n === 1 ? 0 : 1;
-        const messages = this.languages[context][key];
+        const messages = this.languages[context] ? this.languages[context][key] : key;
 
         return vsprintf(Array.isArray(messages) ? messages[index] : messages, args);
     }
 
     async changeLanguage(lang: string) {
-        if (lang === this.current) {
+        if (lang === this.current && this.packages.has(lang)) {
             return;
         }
 

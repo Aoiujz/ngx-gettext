@@ -48,6 +48,7 @@ export class I18nDirective implements OnInit, OnDestroy {
         }
 
         this.subscription = this.I18n.onLanguageChange.subscribe(() => {
+            console.log(msgid, this.n, this.plural, this.context, this.args);
             if (this.n && this.plural) {
                 this.setContent(this.I18n.plural(Number(this.n), msgid, this.plural, this.args || [], this.context));
             } else {
