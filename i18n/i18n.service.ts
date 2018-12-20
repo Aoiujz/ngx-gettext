@@ -28,15 +28,17 @@ export class I18nService {
 
     get(key: string, args: any[] = [], context = DEFAULT_CTX) {
         const messages = this.languages[context] ? this.languages[context][key] : key;
+        const msgstr = Array.isArray(messages) ? messages[0] : messages;
 
-        return vsprintf(Array.isArray(messages) ? messages[0] : messages, args);
+        return args.length ? vsprintf(msgstr, args) : msgstr;
     }
 
     plural(n: number, key: string, plural: string, args: any[], context = DEFAULT_CTX) {
         const index = n === 1 ? 0 : 1;
         const messages = this.languages[context] ? this.languages[context][key] : key;
+        const msgstr = Array.isArray(messages) ? messages[index] : messages;
 
-        return vsprintf(Array.isArray(messages) ? messages[index] : messages, args);
+        return args.length ? vsprintf(msgstr, args) : msgstr;
     }
 
     async changeLanguage(lang: string) {
