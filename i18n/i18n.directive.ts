@@ -8,16 +8,16 @@ import { Subscription } from 'rxjs';
 import { I18nService } from './i18n.service';
 
 @Directive({
-    selector: '[i18ns]',
+    selector: '[i18n]',
 })
 export class I18nDirective implements OnInit, OnDestroy {
     @Input()
-    private i18ns: string;
+    private i18n: string;
 
-    @Input('aaa-n')
-    private n: string;
+    @Input('i18n-n')
+    private n: number;
 
-    @Input('aaa-plural')
+    @Input('i18n-plural')
     private plural: string;
 
     @Input('i18n-args')
@@ -41,8 +41,8 @@ export class I18nDirective implements OnInit, OnDestroy {
 
         console.log(this.n);
 
-        if (this.n && !/\d+/.test(this.n)) {
-            throw new Error('Attribute "i18n-n" must be a numeric string');
+        if (this.n && !Number.isFinite(this.n)) {
+            throw new Error('Attribute "i18n-n" must be a number');
         }
 
         if (this.args && !Array.isArray(this.args)) {
@@ -64,16 +64,16 @@ export class I18nDirective implements OnInit, OnDestroy {
     }
 
     private getMsgid() {
-        if (this.i18ns) {
-            return this.element.getAttribute(this.i18ns);
+        if (this.i18n) {
+            return this.element.getAttribute(this.i18n);
         } else {
             return this.element.textContent;
         }
     }
 
     private setContent(message: string) {
-        if (this.i18ns) {
-            this.element.setAttribute(this.i18ns, message);
+        if (this.i18n) {
+            this.element.setAttribute(this.i18n, message);
         } else {
             this.element.textContent = message;
         }

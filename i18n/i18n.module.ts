@@ -14,4 +14,4 @@ import { I18nService } from './i18n.service';
     declarations: [I18nDirective],
     exports: [I18nDirective],
 })
-export class I18nsModule { }
+export class I18nModule { }
