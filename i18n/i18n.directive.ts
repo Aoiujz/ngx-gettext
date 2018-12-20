@@ -14,7 +14,7 @@ export class I18nDirective implements OnInit, OnDestroy {
     @Input()
     private i18ns: string;
 
-    @Input('i18n-n')
+    @Input('i18ns-n')
     private n: string;
 
     @Input('i18n-plural')
