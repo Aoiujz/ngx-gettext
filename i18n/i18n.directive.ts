@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { I18nService } from './i18n.service';
 
 @Directive({
-    selector: '[i18n]',
+    selector: '[i18naaa]',
 })
 export class I18nDirective implements OnInit, OnDestroy {
     @Input()
@@ -20,7 +20,7 @@ export class I18nDirective implements OnInit, OnDestroy {
     @Input('i18n-plural')
     private plural: string;
 
-    @Input('bbbbb')
+    @Input('i18n-args')
     private args: any[];
 
     @Input('i18n-context')
