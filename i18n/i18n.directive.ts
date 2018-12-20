@@ -20,7 +20,7 @@ export class I18nDirective implements OnInit, OnDestroy {
     @Input('i18n-plural')
     private plural: string;
 
-    @Input('i18n-args')
+    @Input('bbbbb')
     private args: any[];
 
     @Input('i18n-context')
