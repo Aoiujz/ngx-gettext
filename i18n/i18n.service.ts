@@ -28,12 +28,14 @@ export class I18nService {
 
     get(key: string, args: any[] = [], context = DEFAULT_CTX) {
         const translated = this.getTranslated(key, context) || key;
+        console.log(translated);
         return vsprintf(Array.isArray(translated) ? translated[0] : translated, args);
     }
 
     plural(n: number, key: string, plural: string, args: any[], context = DEFAULT_CTX) {
         const index = n === 1 ? 0 : 1;
         const translated = this.getTranslated(key, context) || [key, plural];
+        console.log(['plural', translated]);
         return vsprintf(Array.isArray(translated) ? translated[index] : translated, args);
     }
 
