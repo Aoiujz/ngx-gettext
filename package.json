@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@types/sprintf-js": "^1.1.1",
+    "gettext-extractor": "^3.4.1",
     "sprintf-js": "^1.1.2"
   }
 }
