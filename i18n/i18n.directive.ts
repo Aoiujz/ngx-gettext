@@ -8,22 +8,22 @@ import { Subscription } from 'rxjs';
 import { I18nService } from './i18n.service';
 
 @Directive({
-    selector: '[i18naaa]',
+    selector: '[translate]',
 })
 export class I18nDirective implements OnInit, OnDestroy {
     @Input()
-    private i18n: string;
+    private translate: string;
 
-    @Input('i18n-n')
+    @Input('translate-n')
     private n: number;
 
-    @Input('i18n-plural')
+    @Input('translate-plural')
     private plural: string;
 
-    @Input('i18n-args')
+    @Input('translate-args')
     private args: any[];
 
-    @Input('i18n-context')
+    @Input('translate-context')
     private context: string;
 
     private element: HTMLElement;
@@ -42,11 +42,11 @@ export class I18nDirective implements OnInit, OnDestroy {
         console.log(this.n);
 
         if (this.n && !Number.isFinite(this.n)) {
-            throw new Error('Attribute "i18n-n" must be a number');
+            throw new Error('Attribute "translate-n" must be a number');
         }
 
         if (this.args && !Array.isArray(this.args)) {
-            throw new Error('Attribute "i18n-args" must be an array');
+            throw new Error('Attribute "translate-args" must be an array');
         }
 
         this.subscription = this.I18n.onLanguageChange.subscribe(() => {
@@ -64,16 +64,16 @@ export class I18nDirective implements OnInit, OnDestroy {
     }
 
     private getMsgid() {
-        if (this.i18n) {
-            return this.element.getAttribute(this.i18n);
+        if (this.translate) {
+            return this.element.getAttribute(this.translate);
         } else {
             return this.element.textContent;
         }
     }
 
     private setContent(message: string) {
-        if (this.i18n) {
-            this.element.setAttribute(this.i18n, message);
+        if (this.translate) {
+            this.element.setAttribute(this.translate, message);
         } else {
             this.element.textContent = message;
         }
