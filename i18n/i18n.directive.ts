@@ -39,8 +39,6 @@ export class I18nDirective implements OnInit, OnDestroy {
     ngOnInit() {
         const msgid = this.getMsgid();
 
-        console.log(this.n);
-
         if (this.n && !Number.isFinite(this.n)) {
             throw new Error('Attribute "translate-n" must be a number');
         }
