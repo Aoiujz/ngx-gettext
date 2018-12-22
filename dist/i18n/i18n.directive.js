@@ -80,7 +80,7 @@ __decorate([
 ], I18nDirective.prototype, "context", void 0);
 I18nDirective = __decorate([
     core_1.Directive({
-        selector: '[translate]',
+        selector: '[translate],[translate-attr]',
     }),
     __metadata("design:paramtypes", [core_1.ElementRef,
         i18n_service_1.I18nService])

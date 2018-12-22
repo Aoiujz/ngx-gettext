@@ -7,8 +7,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { vsprintf } from 'sprintf-js';
 import { I18n } from '../references';
-
-const DEFAULT_CTX = '_@@DEFAULT_CTX@@_';
+import { DEFAULT_CTX } from '../gettext/compiler';
 
 @Injectable()
 export class I18nService {

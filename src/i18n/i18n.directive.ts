@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { I18nService } from './i18n.service';
 
 @Directive({
-    selector: '[translate]',
+    selector: '[translate],[translate-attr]',
 })
 export class I18nDirective implements OnInit, OnDestroy {
     @Input('translate-attr')

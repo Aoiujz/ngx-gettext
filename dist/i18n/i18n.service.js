@@ -24,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const rxjs_1 = require("rxjs");
 const sprintf_js_1 = require("sprintf-js");
-const DEFAULT_CTX = '_@@DEFAULT_CTX@@_';
+const compiler_1 = require("../gettext/compiler");
 let I18nService = class I18nService {
     constructor() {
         this.current = 'en_US';
@@ -35,12 +35,12 @@ let I18nService = class I18nService {
     get languages() {
         return this.packages.get(this.current) || {};
     }
-    get(key, args = [], context = DEFAULT_CTX) {
+    get(key, args = [], context = compiler_1.DEFAULT_CTX) {
         const translated = this.getTranslated(key, context) || key;
         console.log(translated);
         return sprintf_js_1.vsprintf(Array.isArray(translated) ? translated[0] : translated, args);
     }
-    plural(n, key, plural, args = [], context = DEFAULT_CTX) {
+    plural(n, key, plural, args = [], context = compiler_1.DEFAULT_CTX) {
         const index = n === 1 ? 0 : 1;
         const translated = this.getTranslated(key, context) || [key, plural];
         console.log(['plural', translated]);

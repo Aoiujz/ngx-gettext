@@ -21,17 +21,21 @@ class Compiler {
     }
     run() {
         const cwd = this.options.sourcePath;
+        if (!fs.existsSync(this.options.tragetPath)) {
+            fs.mkdirSync(this.options.tragetPath);
+        }
         for (const filename of glob.sync('*.po', { cwd })) {
-            console.log(filename);
-            PO.load(filename, (error, po) => {
+            PO.load(path_1.join(cwd, filename), (error, po) => {
                 const data = new Package(po.headers.Language, {});
                 for (const item of po.items) {
                     const id = item.msgid;
                     const ctx = item.msgctxt || exports.DEFAULT_CTX;
-                    if (!data.contexts[ctx]) {
-                        data.contexts[ctx] = {};
+                    if (item.msgstr[0].length > 0 && !item.flags.fuzzy) {
+                        if (!data.contexts[ctx]) {
+                            data.contexts[ctx] = {};
+                        }
+                        data.contexts[ctx][id] = item.msgstr.length === 1 ? item.msgstr[0] : item.msgstr;
                     }
-                    data.contexts[ctx][id] = item.msgstr.length === 1 ? item.msgstr[0] : item.msgstr;
                 }
                 fs.writeFileSync(path_1.join(this.options.tragetPath, filename.replace('.po', '.json')), JSON.stringify(data));
             });
