@@ -19,7 +19,7 @@ export declare namespace Gettext {
 
 export const DEFAULT_CTX = '_@@DEFAULT_CTX@@_';
 
-export class Compile {
+export class Compiler {
     private options: Gettext.CompileOptions = {
         sourcePath: 'i18n',
         tragetPath: 'i18n',
