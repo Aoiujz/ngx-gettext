@@ -42,16 +42,16 @@ let I18nDirective = class I18nDirective {
         this.subscription.unsubscribe();
     }
     getMsgid() {
-        if (this.translate) {
-            return this.element.getAttribute(this.translate);
+        if (this.attr) {
+            return this.element.getAttribute(this.attr);
         }
         else {
             return this.element.textContent;
         }
     }
     setContent(message) {
-        if (this.translate) {
-            this.element.setAttribute(this.translate, message);
+        if (this.attr) {
+            this.element.setAttribute(this.attr, message);
         }
         else {
             this.element.textContent = message;
@@ -59,9 +59,9 @@ let I18nDirective = class I18nDirective {
     }
 };
 __decorate([
-    core_1.Input(),
+    core_1.Input('translate-attr'),
     __metadata("design:type", String)
-], I18nDirective.prototype, "translate", void 0);
+], I18nDirective.prototype, "attr", void 0);
 __decorate([
     core_1.Input('translate-n'),
     __metadata("design:type", Number)

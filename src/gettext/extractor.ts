@@ -45,16 +45,11 @@ export class Extractor {
             process.chdir(this.options.cwd);
         }
 
-        const htmlextractors = [
-            HtmlExtractors.elementContent('[translate]', { attributes }),
-            HtmlExtractors.elementAttribute('[translate=title]', 'title', { attributes }),
-            HtmlExtractors.elementAttribute('[translate=title]', 'menu', { attributes }),
-            HtmlExtractors.elementAttribute('[translate=title]', 'placeholder', { attributes }),
-        ];
+        const htmlextractors = [HtmlExtractors.elementContent('[translate]', { attributes })];
 
-        // for (const attr of this.options.attrs) {
-        //     htmlextractors.push(HtmlExtractors.elementAttribute(`[translate=${attr}]`, attr, { attributes }));
-        // }
+        for (const attr of this.options.attrs) {
+            htmlextractors.push(HtmlExtractors.elementAttribute(`[translate-attr="${attr}"]`, attr, { attributes }));
+        }
 
         const tsextractors = [
             JsExtractors.callExpression('[this].I18n.get', {

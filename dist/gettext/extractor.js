@@ -30,15 +30,10 @@ class Extractor {
         if (this.options.cwd) {
             process.chdir(this.options.cwd);
         }
-        const htmlextractors = [
-            gettext_extractor_1.HtmlExtractors.elementContent('[translate]', { attributes }),
-            gettext_extractor_1.HtmlExtractors.elementAttribute('[translate=title]', 'title', { attributes }),
-            gettext_extractor_1.HtmlExtractors.elementAttribute('[translate=title]', 'menu', { attributes }),
-            gettext_extractor_1.HtmlExtractors.elementAttribute('[translate=title]', 'placeholder', { attributes }),
-        ];
-        // for (const attr of this.options.attrs) {
-        //     htmlextractors.push(HtmlExtractors.elementAttribute(`[translate=${attr}]`, attr, { attributes }));
-        // }
+        const htmlextractors = [gettext_extractor_1.HtmlExtractors.elementContent('[translate]', { attributes })];
+        for (const attr of this.options.attrs) {
+            htmlextractors.push(gettext_extractor_1.HtmlExtractors.elementAttribute(`[translate-attr="${attr}"]`, attr, { attributes }));
+        }
         const tsextractors = [
             gettext_extractor_1.JsExtractors.callExpression('[this].I18n.get', {
                 arguments: {

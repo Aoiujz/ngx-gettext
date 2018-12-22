@@ -11,8 +11,8 @@ import { I18nService } from './i18n.service';
     selector: '[translate]',
 })
 export class I18nDirective implements OnInit, OnDestroy {
-    @Input()
-    private translate: string;
+    @Input('translate-attr')
+    private attr: string;
 
     @Input('translate-n')
     private n: number;
@@ -62,16 +62,16 @@ export class I18nDirective implements OnInit, OnDestroy {
     }
 
     private getMsgid() {
-        if (this.translate) {
-            return this.element.getAttribute(this.translate);
+        if (this.attr) {
+            return this.element.getAttribute(this.attr);
         } else {
             return this.element.textContent;
         }
     }
 
     private setContent(message: string) {
-        if (this.translate) {
-            this.element.setAttribute(this.translate, message);
+        if (this.attr) {
+            this.element.setAttribute(this.attr, message);
         } else {
             this.element.textContent = message;
         }
