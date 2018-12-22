@@ -1,16 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-export declare namespace I18n {
-    interface Package {
-        language: string;
-        contexts: Contexts;
-    }
-    interface Contexts {
-        [key: string]: Items;
-    }
-    interface Items {
-        [key: string]: string | string[];
-    }
-}
+import { I18n } from '../references';
 export declare class I18nService {
     private current;
     private packages;
