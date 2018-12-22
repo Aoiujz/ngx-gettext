@@ -3,7 +3,7 @@
  * @author zuojiazi@vip.qq.com
  */
 
-/// <reference path="gettext.d.ts" />
+/// <reference path="../index.d.ts" />
 
 import { GettextExtractor, JsExtractors, HtmlExtractors } from 'gettext-extractor';
 import { join } from 'path';
@@ -16,7 +16,7 @@ export class Extractor {
         savePath: 'i18n',
         htmlGlob: '**/*.html',
         tsGlob: '**/*.ts',
-    }
+    };
 
     constructor(options?: Gettext.ExtractorOptions) {
         if (options) {
@@ -29,7 +29,7 @@ export class Extractor {
         const extractor = new GettextExtractor();
         const attributes = {
             textPlural: 'translate-plural',
-            context: 'translate-context'
+            context: 'translate-context',
         };
 
         if (this.options.cwd) {

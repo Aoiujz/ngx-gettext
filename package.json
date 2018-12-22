@@ -2,7 +2,7 @@
   "name": "ngx-gettext",
   "version": "1.0.0",
   "description": "Gettext for Angular2+",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

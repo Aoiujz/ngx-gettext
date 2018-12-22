@@ -3,7 +3,7 @@
  * @author zuojiazi@vip.qq.com
  */
 
-/// <reference path="i18n.d.ts" />
+/// <reference path="../index.d.ts" />
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
