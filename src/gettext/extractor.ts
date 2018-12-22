@@ -47,11 +47,14 @@ export class Extractor {
 
         const htmlextractors = [
             HtmlExtractors.elementContent('[translate]', { attributes }),
+            HtmlExtractors.elementAttribute('[translate=title]', 'title', { attributes }),
+            HtmlExtractors.elementAttribute('[translate=title]', 'menu', { attributes }),
+            HtmlExtractors.elementAttribute('[translate=title]', 'placeholder', { attributes }),
         ];
 
-        for (const attr of this.options.attrs) {
-            htmlextractors.push(HtmlExtractors.elementAttribute(`[translate=${attr}]`, attr, { attributes }));
-        }
+        // for (const attr of this.options.attrs) {
+        //     htmlextractors.push(HtmlExtractors.elementAttribute(`[translate=${attr}]`, attr, { attributes }));
+        // }
 
         const tsextractors = [
             JsExtractors.callExpression('[this].I18n.get', {
