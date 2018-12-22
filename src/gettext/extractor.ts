@@ -3,10 +3,19 @@
  * @author zuojiazi@vip.qq.com
  */
 
-/// <reference path="../index.d.ts" />
-
 import { GettextExtractor, JsExtractors, HtmlExtractors } from 'gettext-extractor';
 import { join } from 'path';
+
+export declare namespace Gettext {
+    interface ExtractorOptions {
+        attrs?: string[];
+        cwd?: string;
+        filename?: string;
+        savePath?: string;
+        htmlGlob?: string;
+        tsGlob?: string;
+    }
+}
 
 export class Extractor {
     private options: Gettext.ExtractorOptions = {

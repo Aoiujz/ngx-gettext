@@ -1,8 +1,10 @@
 {
     "compilerOptions": {
-        "target": "es2015",
-        "module": "es2015",
+        "outDir": "dist/",
+        "target": "ES6",
+        "module": "commonjs",
         "moduleResolution": "node",
+        "declaration": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": [
@@ -13,5 +15,11 @@
         ],
         "noImplicitAny": true,
         "suppressImplicitAnyIndexErrors": true
-    }
+    },
+    "files": [
+        "src/index.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ],
 }

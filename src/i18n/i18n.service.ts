@@ -3,13 +3,26 @@
  * @author zuojiazi@vip.qq.com
  */
 
-/// <reference path="../index.d.ts" />
-
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { vsprintf } from 'sprintf-js';
 
 const DEFAULT_CTX = '_@@DEFAULT_CTX@@_';
+
+export declare namespace I18n {
+    interface Package {
+        language: string;
+        contexts: Contexts;
+    }
+
+    interface Contexts {
+        [key: string]: Items;
+    }
+
+    interface Items {
+        [key: string]: string | string[];
+    }
+}
 
 @Injectable()
 export class I18nService {

@@ -3,53 +3,51 @@
  * Extract multilingual strings
  * @author zuojiazi@vip.qq.com
  */
-exports.__esModule = true;
-/// <reference path="gettext.d.ts" />
-var gettext_extractor_1 = require("gettext-extractor");
-var path_1 = require("path");
-var Extractor = /** @class */ (function () {
-    function Extractor(options) {
+Object.defineProperty(exports, "__esModule", { value: true });
+const gettext_extractor_1 = require("gettext-extractor");
+const path_1 = require("path");
+class Extractor {
+    constructor(options) {
         this.options = {
             attrs: [],
             cwd: null,
             filename: 'messages.pot',
             savePath: 'i18n',
             htmlGlob: '**/*.html',
-            tsGlob: '**/*.ts'
+            tsGlob: '**/*.ts',
         };
         if (options) {
             Object.assign(this.options, options);
         }
     }
-    Extractor.prototype.run = function () {
-        var cwd = process.cwd();
-        var extractor = new gettext_extractor_1.GettextExtractor();
-        var attributes = {
+    run() {
+        const cwd = process.cwd();
+        const extractor = new gettext_extractor_1.GettextExtractor();
+        const attributes = {
             textPlural: 'translate-plural',
-            context: 'translate-context'
+            context: 'translate-context',
         };
         if (this.options.cwd) {
             process.chdir(this.options.cwd);
         }
-        var htmlextractors = [
-            gettext_extractor_1.HtmlExtractors.elementContent('[translate]', { attributes: attributes }),
+        const htmlextractors = [
+            gettext_extractor_1.HtmlExtractors.elementContent('[translate]', { attributes }),
         ];
-        for (var _i = 0, _a = this.options.attrs; _i < _a.length; _i++) {
-            var attr = _a[_i];
-            htmlextractors.push(gettext_extractor_1.HtmlExtractors.elementAttribute("[translate=" + attr + "]", attr, { attributes: attributes }));
+        for (const attr of this.options.attrs) {
+            htmlextractors.push(gettext_extractor_1.HtmlExtractors.elementAttribute(`[translate=${attr}]`, attr, { attributes }));
         }
-        var tsextractors = [
+        const tsextractors = [
             gettext_extractor_1.JsExtractors.callExpression('[this].I18n.get', {
                 arguments: {
                     text: 0,
-                    context: 2
+                    context: 2,
                 }
             }),
             gettext_extractor_1.JsExtractors.callExpression('[this].I18n.plural', {
                 arguments: {
                     text: 1,
                     textPlural: 2,
-                    context: 4
+                    context: 4,
                 }
             }),
         ];
@@ -60,7 +58,6 @@ var Extractor = /** @class */ (function () {
             process.chdir(cwd);
         }
         return extractor;
-    };
-    return Extractor;
-}());
+    }
+}
 exports.Extractor = Extractor;
