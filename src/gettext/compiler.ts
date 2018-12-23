@@ -3,11 +3,11 @@
  * @author zuojiazi@vip.qq.com
  */
 
-import { I18n } from '../references';
 import * as PO from 'pofile';
 import * as glob from 'glob';
 import * as fs from 'fs';
 import { join } from 'path';
+import { I18n, DEFAULT_CTX } from '../references';
 
 
 export declare namespace Gettext {
@@ -16,8 +16,6 @@ export declare namespace Gettext {
         tragetPath?: string;
     }
 }
-
-export const DEFAULT_CTX = '_@@DEFAULT_CTX@@_';
 
 export class Compiler {
     private options: Gettext.CompileOptions = {

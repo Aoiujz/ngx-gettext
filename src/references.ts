@@ -12,3 +12,5 @@ export declare namespace I18n {
         [key: string]: string | string[];
     }
 }
+
+export const DEFAULT_CTX = '_@@DEFAULT_CTX@@_';

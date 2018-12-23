@@ -6,8 +6,8 @@ export declare class I18nService {
     readonly onLanguageChange: BehaviorSubject<string>;
     readonly languages: I18n.Contexts;
     constructor();
-    get(key: string, args?: any[], context?: string): string;
-    plural(n: number, key: string, plural: string, args?: any[], context?: string): string;
+    get(key: string, args?: any[], context?: any): string;
+    plural(n: number, key: string, plural: string, args?: any[], context?: any): string;
     changeLanguage(lang: string): Promise<void>;
     private load(lang);
     private getTranslated(key, ctx);

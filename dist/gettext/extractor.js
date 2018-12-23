@@ -4,10 +4,10 @@
  * @author zuojiazi@vip.qq.com
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const gettext_extractor_1 = require("gettext-extractor");
-const path_1 = require("path");
-class Extractor {
-    constructor(options) {
+var gettext_extractor_1 = require("gettext-extractor");
+var path_1 = require("path");
+var Extractor = /** @class */ (function () {
+    function Extractor(options) {
         this.options = {
             attrs: [],
             cwd: null,
@@ -20,21 +20,22 @@ class Extractor {
             Object.assign(this.options, options);
         }
     }
-    run() {
-        const cwd = process.cwd();
-        const extractor = new gettext_extractor_1.GettextExtractor();
-        const attributes = {
+    Extractor.prototype.run = function () {
+        var cwd = process.cwd();
+        var extractor = new gettext_extractor_1.GettextExtractor();
+        var attributes = {
             textPlural: 'translate-plural',
             context: 'translate-context',
         };
         if (this.options.cwd) {
             process.chdir(this.options.cwd);
         }
-        const htmlextractors = [gettext_extractor_1.HtmlExtractors.elementContent('[translate]', { attributes })];
-        for (const attr of this.options.attrs) {
-            htmlextractors.push(gettext_extractor_1.HtmlExtractors.elementAttribute(`[translate-attr="${attr}"]`, attr, { attributes }));
+        var htmlextractors = [gettext_extractor_1.HtmlExtractors.elementContent('[translate]', { attributes: attributes })];
+        for (var _i = 0, _a = this.options.attrs; _i < _a.length; _i++) {
+            var attr = _a[_i];
+            htmlextractors.push(gettext_extractor_1.HtmlExtractors.elementAttribute("[translate-attr=\"" + attr + "\"]", attr, { attributes: attributes }));
         }
-        const tsextractors = [
+        var tsextractors = [
             gettext_extractor_1.JsExtractors.callExpression('[this].I18n.get', {
                 arguments: {
                     text: 0,
@@ -56,6 +57,7 @@ class Extractor {
             process.chdir(cwd);
         }
         return extractor;
-    }
-}
+    };
+    return Extractor;
+}());
 exports.Extractor = Extractor;

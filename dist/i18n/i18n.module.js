@@ -10,18 +10,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-const common_1 = require("@angular/common");
-const i18n_directive_1 = require("./i18n.directive");
-const i18n_service_1 = require("./i18n.service");
-let I18nModule = class I18nModule {
-};
-I18nModule = __decorate([
-    core_1.NgModule({
-        imports: [common_1.CommonModule],
-        providers: [i18n_service_1.I18nService],
-        declarations: [i18n_directive_1.I18nDirective],
-        exports: [i18n_directive_1.I18nDirective],
-    })
-], I18nModule);
+var core_1 = require("@angular/core");
+var common_1 = require("@angular/common");
+var i18n_directive_1 = require("./i18n.directive");
+var i18n_service_1 = require("./i18n.service");
+var I18nModule = /** @class */ (function () {
+    function I18nModule() {
+    }
+    I18nModule = __decorate([
+        core_1.NgModule({
+            imports: [common_1.CommonModule],
+            providers: [i18n_service_1.I18nService],
+            declarations: [i18n_directive_1.I18nDirective],
+            exports: [i18n_directive_1.I18nDirective],
+        })
+    ], I18nModule);
+    return I18nModule;
+}());
 exports.I18nModule = I18nModule;
