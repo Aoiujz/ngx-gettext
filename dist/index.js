@@ -14,4 +14,3 @@ var extractor_1 = require("./gettext/extractor");
 exports.Extractor = extractor_1.Extractor;
 var compiler_1 = require("./gettext/compiler");
 exports.Compiler = compiler_1.Compiler;
-exports.DEFAULT_CTX = compiler_1.DEFAULT_CTX;
