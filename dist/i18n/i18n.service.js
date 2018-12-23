@@ -51,7 +51,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var rxjs_1 = require("rxjs");
 var sprintf_js_1 = require("sprintf-js");
-var compiler_1 = require("../gettext/compiler");
+var references_1 = require("../references");
 var I18nService = /** @class */ (function () {
     function I18nService() {
         this.current = 'en_US';
@@ -68,14 +68,14 @@ var I18nService = /** @class */ (function () {
     });
     I18nService.prototype.get = function (key, args, context) {
         if (args === void 0) { args = []; }
-        if (context === void 0) { context = compiler_1.DEFAULT_CTX; }
+        if (context === void 0) { context = references_1.DEFAULT_CTX; }
         var translated = this.getTranslated(key, context) || key;
         console.log(translated);
         return sprintf_js_1.vsprintf(Array.isArray(translated) ? translated[0] : translated, args);
     };
     I18nService.prototype.plural = function (n, key, plural, args, context) {
         if (args === void 0) { args = []; }
-        if (context === void 0) { context = compiler_1.DEFAULT_CTX; }
+        if (context === void 0) { context = references_1.DEFAULT_CTX; }
         var index = n === 1 ? 0 : 1;
         var translated = this.getTranslated(key, context) || [key, plural];
         console.log(['plural', translated]);
