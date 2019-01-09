@@ -1,4 +1,3 @@
-"use strict";
 /**
  * I18n Service
  * @author zuojiazi@vip.qq.com
@@ -47,96 +46,107 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var rxjs_1 = require("rxjs");
-var sprintf_js_1 = require("sprintf-js");
-var references_1 = require("../references");
-var I18nService = /** @class */ (function () {
-    function I18nService() {
-        this.current = 'en_US';
-        this.packages = new Map();
-        this.onLanguageChange = new rxjs_1.BehaviorSubject(this.current);
-        this.changeLanguage(this.current);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
     }
-    Object.defineProperty(I18nService.prototype, "languages", {
-        get: function () {
-            return this.packages.get(this.current) || {};
-        },
-        enumerable: true,
-        configurable: true
-    });
-    I18nService.prototype.get = function (key, args, context) {
-        if (args === void 0) { args = []; }
-        if (context === void 0) { context = references_1.DEFAULT_CTX; }
-        var translated = this.getTranslated(key, context) || key;
-        console.log(translated);
-        return sprintf_js_1.vsprintf(Array.isArray(translated) ? translated[0] : translated, args);
-    };
-    I18nService.prototype.plural = function (n, key, plural, args, context) {
-        if (args === void 0) { args = []; }
-        if (context === void 0) { context = references_1.DEFAULT_CTX; }
-        var index = n === 1 ? 0 : 1;
-        var translated = this.getTranslated(key, context) || [key, plural];
-        console.log(['plural', translated]);
-        return sprintf_js_1.vsprintf(Array.isArray(translated) ? translated[index] : translated, args);
-    };
-    I18nService.prototype.changeLanguage = function (lang) {
-        return __awaiter(this, void 0, void 0, function () {
-            var e_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (lang === this.current && this.packages.has(lang)) {
-                            return [2 /*return*/];
-                        }
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, this.load(lang)];
-                    case 2:
-                        _a.sent();
-                        this.current = lang;
-                        this.onLanguageChange.next(lang);
-                        return [3 /*break*/, 4];
-                    case 3:
-                        e_1 = _a.sent();
-                        throw new Error('Change language failed.');
-                    case 4: return [2 /*return*/];
-                }
-            });
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "@angular/core", "rxjs", "sprintf-js", "../references"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var core_1 = require("@angular/core");
+    var rxjs_1 = require("rxjs");
+    var sprintf_js_1 = require("sprintf-js");
+    var references_1 = require("../references");
+    var I18nService = /** @class */ (function () {
+        function I18nService() {
+            this.current = 'en_US';
+            this.packages = new Map();
+            this.onLanguageChange = new rxjs_1.BehaviorSubject(this.current);
+            this.changeLanguage(this.current);
+        }
+        Object.defineProperty(I18nService.prototype, "languages", {
+            get: function () {
+                return this.packages.get(this.current) || {};
+            },
+            enumerable: true,
+            configurable: true
         });
-    };
-    I18nService.prototype.load = function (lang) {
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!this.packages.has(lang)) return [3 /*break*/, 1];
-                        return [2 /*return*/, lang];
-                    case 1: return [4 /*yield*/, fetch("/i18n/" + lang + ".json")];
-                    case 2:
-                        response = _a.sent();
-                        return [4 /*yield*/, response.json()];
-                    case 3:
-                        data = _a.sent();
-                        if (data.language !== lang) {
-                            throw new Error('The language pack was not found.');
-                        }
-                        this.packages.set(data.language, data.contexts);
-                        return [2 /*return*/, lang];
-                }
+        I18nService.prototype.get = function (key, args, context) {
+            if (args === void 0) { args = []; }
+            if (context === void 0) { context = references_1.DEFAULT_CTX; }
+            var translated = this.getTranslated(key, context) || key;
+            console.log(translated);
+            return sprintf_js_1.vsprintf(Array.isArray(translated) ? translated[0] : translated, args);
+        };
+        I18nService.prototype.plural = function (n, key, plural, args, context) {
+            if (args === void 0) { args = []; }
+            if (context === void 0) { context = references_1.DEFAULT_CTX; }
+            var index = n === 1 ? 0 : 1;
+            var translated = this.getTranslated(key, context) || [key, plural];
+            console.log(['plural', translated]);
+            return sprintf_js_1.vsprintf(Array.isArray(translated) ? translated[index] : translated, args);
+        };
+        I18nService.prototype.changeLanguage = function (lang) {
+            return __awaiter(this, void 0, void 0, function () {
+                var e_1;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (lang === this.current && this.packages.has(lang)) {
+                                return [2 /*return*/];
+                            }
+                            _a.label = 1;
+                        case 1:
+                            _a.trys.push([1, 3, , 4]);
+                            return [4 /*yield*/, this.load(lang)];
+                        case 2:
+                            _a.sent();
+                            this.current = lang;
+                            this.onLanguageChange.next(lang);
+                            return [3 /*break*/, 4];
+                        case 3:
+                            e_1 = _a.sent();
+                            throw new Error('Change language failed.');
+                        case 4: return [2 /*return*/];
+                    }
+                });
             });
-        });
-    };
-    I18nService.prototype.getTranslated = function (key, ctx) {
-        return this.languages[ctx] ? this.languages[ctx][key] : null;
-    };
-    I18nService = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [])
-    ], I18nService);
-    return I18nService;
-}());
-exports.I18nService = I18nService;
+        };
+        I18nService.prototype.load = function (lang) {
+            return __awaiter(this, void 0, void 0, function () {
+                var response, data;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!this.packages.has(lang)) return [3 /*break*/, 1];
+                            return [2 /*return*/, lang];
+                        case 1: return [4 /*yield*/, fetch("/i18n/" + lang + ".json")];
+                        case 2:
+                            response = _a.sent();
+                            return [4 /*yield*/, response.json()];
+                        case 3:
+                            data = _a.sent();
+                            if (data.language !== lang) {
+                                throw new Error('The language pack was not found.');
+                            }
+                            this.packages.set(data.language, data.contexts);
+                            return [2 /*return*/, lang];
+                    }
+                });
+            });
+        };
+        I18nService.prototype.getTranslated = function (key, ctx) {
+            return this.languages[ctx] ? this.languages[ctx][key] : null;
+        };
+        I18nService = __decorate([
+            core_1.Injectable(),
+            __metadata("design:paramtypes", [])
+        ], I18nService);
+        return I18nService;
+    }());
+    exports.I18nService = I18nService;
+});

@@ -1,4 +1,3 @@
-"use strict";
 /**
  * Compile po to json
  * @author zuojiazi@vip.qq.com
@@ -38,80 +37,91 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var PO = require("pofile");
-var glob = require("glob");
-var fs = require("fs");
-var path_1 = require("path");
-var references_1 = require("../references");
-var Compiler = /** @class */ (function () {
-    function Compiler(options) {
-        this.options = {
-            sourcePath: 'i18n',
-            tragetPath: 'i18n',
-        };
-        if (options) {
-            Object.assign(this.options, options);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "pofile", "glob", "fs", "path", "../references"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var PO = require("pofile");
+    var glob = require("glob");
+    var fs = require("fs");
+    var path_1 = require("path");
+    var references_1 = require("../references");
+    var Compiler = /** @class */ (function () {
+        function Compiler(options) {
+            this.options = {
+                sourcePath: 'i18n',
+                tragetPath: 'i18n',
+            };
+            if (options) {
+                Object.assign(this.options, options);
+            }
         }
-    }
-    Compiler.prototype.run = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var cwd, _i, _a, filename;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        cwd = this.options.sourcePath;
-                        if (!fs.existsSync(this.options.tragetPath)) {
-                            fs.mkdirSync(this.options.tragetPath);
-                        }
-                        _i = 0, _a = glob.sync('*.po', { cwd: cwd });
-                        _b.label = 1;
-                    case 1:
-                        if (!(_i < _a.length)) return [3 /*break*/, 4];
-                        filename = _a[_i];
-                        return [4 /*yield*/, this.loadPoFile(cwd, filename)];
-                    case 2:
-                        _b.sent();
-                        _b.label = 3;
-                    case 3:
-                        _i++;
-                        return [3 /*break*/, 1];
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Compiler.prototype.loadPoFile = function (filepath, filename) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            PO.load(path_1.join(filepath, filename), function (error, po) {
-                if (error) {
-                    throw error;
-                }
-                var data = new Package(po.headers.Language, {});
-                for (var _i = 0, _a = po.items; _i < _a.length; _i++) {
-                    var item = _a[_i];
-                    var id = item.msgid;
-                    var ctx = item.msgctxt || references_1.DEFAULT_CTX;
-                    if (item.msgstr[0].length > 0 && !item.flags.fuzzy) {
-                        if (!data.contexts[ctx]) {
-                            data.contexts[ctx] = {};
-                        }
-                        data.contexts[ctx][id] = item.msgstr.length === 1 ? item.msgstr[0] : item.msgstr;
+        Compiler.prototype.run = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var cwd, _i, _a, filename;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
+                        case 0:
+                            cwd = this.options.sourcePath;
+                            if (!fs.existsSync(this.options.tragetPath)) {
+                                fs.mkdirSync(this.options.tragetPath);
+                            }
+                            _i = 0, _a = glob.sync('*.po', { cwd: cwd });
+                            _b.label = 1;
+                        case 1:
+                            if (!(_i < _a.length)) return [3 /*break*/, 4];
+                            filename = _a[_i];
+                            return [4 /*yield*/, this.loadPoFile(cwd, filename)];
+                        case 2:
+                            _b.sent();
+                            _b.label = 3;
+                        case 3:
+                            _i++;
+                            return [3 /*break*/, 1];
+                        case 4: return [2 /*return*/];
                     }
-                }
-                fs.writeFileSync(path_1.join(_this.options.tragetPath, filename.replace('.po', '.json')), JSON.stringify(data));
-                resolve();
+                });
             });
-        });
-    };
-    return Compiler;
-}());
-exports.Compiler = Compiler;
-var Package = /** @class */ (function () {
-    function Package(language, contexts) {
-        this.language = language;
-        this.contexts = contexts;
-    }
-    return Package;
-}());
+        };
+        Compiler.prototype.loadPoFile = function (filepath, filename) {
+            var _this = this;
+            return new Promise(function (resolve, reject) {
+                PO.load(path_1.join(filepath, filename), function (error, po) {
+                    if (error) {
+                        throw error;
+                    }
+                    var data = new Package(po.headers.Language, {});
+                    for (var _i = 0, _a = po.items; _i < _a.length; _i++) {
+                        var item = _a[_i];
+                        var id = item.msgid;
+                        var ctx = item.msgctxt || references_1.DEFAULT_CTX;
+                        if (item.msgstr[0].length > 0 && !item.flags.fuzzy) {
+                            if (!data.contexts[ctx]) {
+                                data.contexts[ctx] = {};
+                            }
+                            data.contexts[ctx][id] = item.msgstr.length === 1 ? item.msgstr[0] : item.msgstr;
+                        }
+                    }
+                    fs.writeFileSync(path_1.join(_this.options.tragetPath, filename.replace('.po', '.json')), JSON.stringify(data));
+                    resolve();
+                });
+            });
+        };
+        return Compiler;
+    }());
+    exports.Compiler = Compiler;
+    var Package = /** @class */ (function () {
+        function Package(language, contexts) {
+            this.language = language;
+            this.contexts = contexts;
+        }
+        return Package;
+    }());
+});
