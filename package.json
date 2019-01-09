@@ -43,7 +43,7 @@
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-packagr": "^4.2.0",
-    "ngx-gettext-tools": "github:Aoiujz/ngx-gettext-tools",
+    "ngx-gettext-tools": "^1.0.1",
     "protractor": "~5.4.0",
     "sprintf-js": "^1.1.2",
     "ts-node": "~7.0.0",

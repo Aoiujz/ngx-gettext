@@ -1,8 +1,10 @@
 {
-  "name": "i18n",
-  "version": "0.0.1",
+  "name": "ngx-gettext",
+  "version": "0.0.2",
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+    "@angular/common": "^7.1.4",
+    "@angular/core": "^7.1.4",
+    "ngx-gettext-tools": "^1.0.0",
+    "sprintf-js": "^1.1.2"
   }
 }
