@@ -11,5 +11,6 @@ export declare namespace Gettext {
 export declare class Compiler {
     private options;
     constructor(options?: Gettext.CompileOptions);
-    run(): void;
+    run(): Promise<void>;
+    private loadPoFile;
 }

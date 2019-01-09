@@ -29,7 +29,7 @@ export class Compiler {
         }
     }
 
-    run() {
+    async run() {
         const cwd = this.options.sourcePath;
 
         if (!fs.existsSync(this.options.tragetPath)) {
@@ -37,7 +37,13 @@ export class Compiler {
         }
 
         for(const filename of glob.sync('*.po', { cwd })) {
-            PO.load(join(cwd, filename), (error, po) => {
+            await this.loadPoFile(join(cwd, filename));
+        }
+    }
+
+    private loadPoFile(filename: string) {
+        return new Promise((resolve, reject) => {
+            PO.load(filename, (error, po) => {
                 const data = new Package(po.headers.Language, {});
 
                 for (const item of po.items) {
@@ -54,8 +60,9 @@ export class Compiler {
                 }
 
                 fs.writeFileSync(join(this.options.tragetPath, filename.replace('.po', '.json')), JSON.stringify(data));
+                resolve();
             });
-        }
+        });
     }
 }
 
