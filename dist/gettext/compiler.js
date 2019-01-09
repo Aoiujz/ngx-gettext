@@ -69,7 +69,7 @@ var Compiler = /** @class */ (function () {
                     case 1:
                         if (!(_i < _a.length)) return [3 /*break*/, 4];
                         filename = _a[_i];
-                        return [4 /*yield*/, this.loadPoFile(path_1.join(cwd, filename))];
+                        return [4 /*yield*/, this.loadPoFile(cwd, filename)];
                     case 2:
                         _b.sent();
                         _b.label = 3;
@@ -81,10 +81,13 @@ var Compiler = /** @class */ (function () {
             });
         });
     };
-    Compiler.prototype.loadPoFile = function (filename) {
+    Compiler.prototype.loadPoFile = function (filepath, filename) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            PO.load(filename, function (error, po) {
+            PO.load(path_1.join(filepath, filename), function (error, po) {
+                if (error) {
+                    throw error;
+                }
                 var data = new Package(po.headers.Language, {});
                 for (var _i = 0, _a = po.items; _i < _a.length; _i++) {
                     var item = _a[_i];

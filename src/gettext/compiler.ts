@@ -37,13 +37,17 @@ export class Compiler {
         }
 
         for(const filename of glob.sync('*.po', { cwd })) {
-            await this.loadPoFile(join(cwd, filename));
+            await this.loadPoFile(cwd, filename);
         }
     }
 
-    private loadPoFile(filename: string) {
+    private loadPoFile(filepath: string, filename: string) {
         return new Promise((resolve, reject) => {
-            PO.load(filename, (error, po) => {
+            PO.load(join(filepath, filename), (error, po) => {
+                if (error) {
+                    throw error;
+                }
+
                 const data = new Package(po.headers.Language, {});
 
                 for (const item of po.items) {
