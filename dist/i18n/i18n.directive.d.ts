@@ -16,6 +16,6 @@ export declare class I18nDirective implements OnInit, OnDestroy {
     constructor(element: ElementRef, I18n: I18nService);
     ngOnInit(): void;
     ngOnDestroy(): void;
-    private getMsgid();
-    private setContent(message);
+    private getMsgid;
+    private setContent;
 }

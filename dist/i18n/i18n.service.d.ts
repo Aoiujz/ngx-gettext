@@ -1,3 +1,7 @@
+/**
+ * I18n Service
+ * @author zuojiazi@vip.qq.com
+ */
 import { BehaviorSubject } from 'rxjs';
 import { I18n } from '../references';
 export declare class I18nService {
@@ -9,6 +13,6 @@ export declare class I18nService {
     get(key: string, args?: any[], context?: string): string;
     plural(n: number, key: string, plural: string, args?: any[], context?: string): string;
     changeLanguage(lang: string): Promise<void>;
-    private load(lang);
-    private getTranslated(key, ctx);
+    private load;
+    private getTranslated;
 }
