@@ -1,23 +1,30 @@
 {
-    "compilerOptions": {
-        "outDir": "dist/",
-        "target": "es5",
-        "module": "umd",
-        "moduleResolution": "node",
-        "declaration": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "lib": [
-            "es2017",
-            "dom"
-        ],
-        "noImplicitAny": true,
-        "suppressImplicitAnyIndexErrors": true
-    },
-    "files": [
-        "src/index.ts"
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
     ],
-    "exclude": [
-        "node_modules"
+    "lib": [
+      "es2018",
+      "dom"
     ],
+    "paths": {
+      "i18n": [
+        "dist/i18n"
+      ],
+      "i18n/*": [
+        "dist/i18n/*"
+      ]
+    }
+  }
 }

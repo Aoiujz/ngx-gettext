@@ -8,21 +8,26 @@ import { Subscription } from 'rxjs';
 import { I18nService } from './i18n.service';
 
 @Directive({
+    // tslint:disable-next-line:directive-selector
     selector: '[translate],[translate-attr]',
 })
 export class I18nDirective implements OnInit, OnDestroy {
     @Input('translate-attr')
     private attr: string;
 
+    // tslint:disable-next-line:no-input-rename
     @Input('translate-n')
     private n: number;
 
+    // tslint:disable-next-line:no-input-rename
     @Input('translate-plural')
     private plural: string;
 
+    // tslint:disable-next-line:no-input-rename
     @Input('translate-args')
     private args: any[];
 
+    // tslint:disable-next-line:no-input-rename
     @Input('translate-context')
     private context: string;
 
