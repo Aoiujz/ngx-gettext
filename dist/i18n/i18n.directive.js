@@ -1,3 +1,4 @@
+"use strict";
 /**
  * I18n Directive
  * @author zuojiazi@vip.qq.com
@@ -11,76 +12,79 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Directive, ElementRef, Input } from '@angular/core';
-import { I18nService } from './i18n.service';
-let I18nDirective = class I18nDirective {
-    constructor(element, I18n) {
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var i18n_service_1 = require("./i18n.service");
+var I18nDirective = /** @class */ (function () {
+    function I18nDirective(element, I18n) {
         this.I18n = I18n;
         this.element = element.nativeElement;
     }
-    ngOnInit() {
-        const msgid = this.getMsgid();
+    I18nDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        var msgid = this.getMsgid();
         if (this.n && !Number.isFinite(this.n)) {
             throw new Error('Attribute "translate-n" must be a number');
         }
         if (this.args && !Array.isArray(this.args)) {
             throw new Error('Attribute "translate-args" must be an array');
         }
-        this.subscription = this.I18n.onLanguageChange.subscribe(() => {
-            console.log([msgid, this.n, this.plural, this.context, this.args]);
-            if (this.n && this.plural) {
-                this.setContent(this.I18n.plural(Number(this.n), msgid, this.plural, this.args || [], this.context));
+        this.subscription = this.I18n.onLanguageChange.subscribe(function () {
+            console.log([msgid, _this.n, _this.plural, _this.context, _this.args]);
+            if (_this.n && _this.plural) {
+                _this.setContent(_this.I18n.plural(Number(_this.n), msgid, _this.plural, _this.args || [], _this.context));
             }
             else {
-                this.setContent(this.I18n.get(msgid, this.args || [], this.context));
+                _this.setContent(_this.I18n.get(msgid, _this.args || [], _this.context));
             }
         });
-    }
-    ngOnDestroy() {
+    };
+    I18nDirective.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
-    }
-    getMsgid() {
+    };
+    I18nDirective.prototype.getMsgid = function () {
         if (this.attr) {
             return this.element.getAttribute(this.attr);
         }
         else {
             return this.element.textContent;
         }
-    }
-    setContent(message) {
+    };
+    I18nDirective.prototype.setContent = function (message) {
         if (this.attr) {
             this.element.setAttribute(this.attr, message);
         }
         else {
             this.element.textContent = message;
         }
-    }
-};
-__decorate([
-    Input('translate-attr'),
-    __metadata("design:type", String)
-], I18nDirective.prototype, "attr", void 0);
-__decorate([
-    Input('translate-n'),
-    __metadata("design:type", Number)
-], I18nDirective.prototype, "n", void 0);
-__decorate([
-    Input('translate-plural'),
-    __metadata("design:type", String)
-], I18nDirective.prototype, "plural", void 0);
-__decorate([
-    Input('translate-args'),
-    __metadata("design:type", Array)
-], I18nDirective.prototype, "args", void 0);
-__decorate([
-    Input('translate-context'),
-    __metadata("design:type", String)
-], I18nDirective.prototype, "context", void 0);
-I18nDirective = __decorate([
-    Directive({
-        selector: '[translate],[translate-attr]',
-    }),
-    __metadata("design:paramtypes", [ElementRef,
-        I18nService])
-], I18nDirective);
-export { I18nDirective };
+    };
+    __decorate([
+        core_1.Input('translate-attr'),
+        __metadata("design:type", String)
+    ], I18nDirective.prototype, "attr", void 0);
+    __decorate([
+        core_1.Input('translate-n'),
+        __metadata("design:type", Number)
+    ], I18nDirective.prototype, "n", void 0);
+    __decorate([
+        core_1.Input('translate-plural'),
+        __metadata("design:type", String)
+    ], I18nDirective.prototype, "plural", void 0);
+    __decorate([
+        core_1.Input('translate-args'),
+        __metadata("design:type", Array)
+    ], I18nDirective.prototype, "args", void 0);
+    __decorate([
+        core_1.Input('translate-context'),
+        __metadata("design:type", String)
+    ], I18nDirective.prototype, "context", void 0);
+    I18nDirective = __decorate([
+        core_1.Directive({
+            selector: '[translate],[translate-attr]',
+        }),
+        __metadata("design:paramtypes", [core_1.ElementRef,
+            i18n_service_1.I18nService])
+    ], I18nDirective);
+    return I18nDirective;
+}());
+exports.I18nDirective = I18nDirective;
