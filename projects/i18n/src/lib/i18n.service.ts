@@ -6,7 +6,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { vsprintf } from 'sprintf-js';
-import { I18n, DEFAULT_CTX } from 'ngx-gettext-tools';
+import { I18n, DEFAULT_CTX } from 'ngx-gettext-tools/dist/helper';
 
 @Injectable()
 export class I18nService {
@@ -24,10 +24,7 @@ export class I18nService {
 
     config(root: string, defaults = 'en_US') {
         this.root = root;
-
-        if (this.current !== defaults) {
-            this.changeLanguage(this.current);
-        }
+        this.current = defaults;
     }
 
     get(key: string, args: any[] = [], context = DEFAULT_CTX) {
