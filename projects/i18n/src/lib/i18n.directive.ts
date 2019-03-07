@@ -3,7 +3,7 @@
  * @author zuojiazi@vip.qq.com
  */
 
-import { Directive, ElementRef, OnInit, Input, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, OnInit, Input, SimpleChanges, OnDestroy, OnChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { I18nService } from './i18n.service';
 
@@ -11,7 +11,7 @@ import { I18nService } from './i18n.service';
     // tslint:disable-next-line:directive-selector
     selector: '[translate],[translate-attr]',
 })
-export class I18nDirective implements OnInit, OnDestroy {
+export class I18nDirective implements OnInit, OnDestroy, OnChanges {
     @Input('translate-attr')
     private attr: string;
 
@@ -53,13 +53,16 @@ export class I18nDirective implements OnInit, OnDestroy {
         }
 
         this.subscription = this.I18n.onLanguageChange.subscribe(() => {
-            // console.log([msgid, this.n, this.plural, this.context, this.args]);
             if (this.n && this.plural) {
                 this.setContent(this.I18n.plural(Number(this.n), msgid, this.plural, this.args || [], this.context));
             } else {
                 this.setContent(this.I18n.get(msgid, this.args || [], this.context));
             }
         });
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        console.log(changes);
     }
 
     ngOnDestroy() {
