@@ -1,6 +1,6 @@
 {
   "name": "ngx-gettext",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "peerDependencies": {
     "@angular/common": "^7.1.4",
     "@angular/core": "^7.1.4",

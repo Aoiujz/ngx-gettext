@@ -42,8 +42,6 @@ export class I18nDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnInit() {
-        const msgid = this.getMsgid();
-
         if (this.n && !Number.isFinite(this.n)) {
             throw new Error('Attribute "translate-n" must be a number');
         }
@@ -53,16 +51,14 @@ export class I18nDirective implements OnInit, OnDestroy, OnChanges {
         }
 
         this.subscription = this.I18n.onLanguageChange.subscribe(() => {
-            if (this.n && this.plural) {
-                this.setContent(this.I18n.plural(Number(this.n), msgid, this.plural, this.args || [], this.context));
-            } else {
-                this.setContent(this.I18n.get(msgid, this.args || [], this.context));
-            }
+            this.update();
         });
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        console.log(changes);
+        if (!changes.args.isFirstChange || changes.plural.isFirstChange || !changes.n.isFirstChange) {
+            this.update();
+        }
     }
 
     ngOnDestroy() {
@@ -82,6 +78,16 @@ export class I18nDirective implements OnInit, OnDestroy, OnChanges {
             this.element.setAttribute(this.attr, message);
         } else {
             this.element.textContent = message;
+        }
+    }
+
+    private update() {
+        const msgid = this.getMsgid();
+
+        if (this.n && this.plural) {
+            this.setContent(this.I18n.plural(Number(this.n), msgid, this.plural, this.args || [], this.context));
+        } else {
+            this.setContent(this.I18n.get(msgid, this.args || [], this.context));
         }
     }
 }
