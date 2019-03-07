@@ -6,11 +6,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { vsprintf } from 'sprintf-js';
-import { I18n, DEFAULT_CTX } from 'ngx-gettext-tools/dist/helper';
+import { I18n, DEFAULT_CTX } from 'ngx-gettext-tools';
 
 @Injectable()
 export class I18nService {
     private current = 'en_US';
+    private root = '';
     private packages = new Map<string, I18n.Contexts>();
 
     readonly onLanguageChange = new BehaviorSubject<string>(this.current);
@@ -19,8 +20,14 @@ export class I18nService {
         return this.packages.get(this.current) || {};
     }
 
-    constructor() {
-        this.changeLanguage(this.current);
+    constructor() { }
+
+    config(root: string, defaults = 'en_US') {
+        this.root = root;
+
+        if (this.current !== defaults) {
+            this.changeLanguage(this.current);
+        }
     }
 
     get(key: string, args: any[] = [], context = DEFAULT_CTX) {
@@ -54,7 +61,7 @@ export class I18nService {
         if (this.packages.has(lang)) {
             return lang;
         } else {
-            const response = await fetch(`/i18n/${lang}.json`);
+            const response = await fetch(`${this.root}/i18n/${lang}.json`);
             const data = await response.json() as I18n.Package;
 
             if (data.language !== lang) {
