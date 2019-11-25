@@ -33,6 +33,7 @@ export class I18nDirective implements OnInit, OnDestroy, OnChanges {
 
     private element: HTMLElement;
     private subscription: Subscription;
+    private msgid: string;
 
     constructor(
         element: ElementRef,
@@ -42,6 +43,12 @@ export class I18nDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnInit() {
+        if (this.attr) {
+            this.msgid = this.element.getAttribute(this.attr);
+        } else {
+            this.msgid = this.element.textContent;
+        }
+
         if (this.n && !Number.isFinite(this.n)) {
             throw new Error('Attribute "translate-n" must be a number');
         }
@@ -56,21 +63,15 @@ export class I18nDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (!changes.args.isFirstChange || changes.plural.isFirstChange || !changes.n.isFirstChange) {
+        if ((changes.args && !changes.args.firstChange) ||
+            (changes.plural && changes.plural.firstChange) ||
+            (changes.n && !changes.n.firstChange)) {
             this.update();
         }
     }
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
-    }
-
-    private getMsgid() {
-        if (this.attr) {
-            return this.element.getAttribute(this.attr);
-        } else {
-            return this.element.textContent;
-        }
     }
 
     private setContent(message: string) {
@@ -82,12 +83,10 @@ export class I18nDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     private update() {
-        const msgid = this.getMsgid();
-
         if (this.n && this.plural) {
-            this.setContent(this.I18n.plural(Number(this.n), msgid, this.plural, this.args || [], this.context));
+            this.setContent(this.I18n.plural(Number(this.n), this.msgid, this.plural, this.args || [], this.context));
         } else {
-            this.setContent(this.I18n.get(msgid, this.args || [], this.context));
+            this.setContent(this.I18n.get(this.msgid, this.args || [], this.context));
         }
     }
 }

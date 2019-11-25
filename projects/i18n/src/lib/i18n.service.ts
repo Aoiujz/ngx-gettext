@@ -4,6 +4,7 @@
  */
 
 import { Injectable } from '@angular/core';
+
 import { BehaviorSubject } from 'rxjs';
 import { vsprintf } from 'sprintf-js';
 import { I18n, DEFAULT_CTX } from 'ngx-gettext-tools/dist/helper';
