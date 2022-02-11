@@ -33,7 +33,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^10.17.5",
     "@types/sprintf-js": "^1.1.2",
-    "ajv": "^6.9.1",
+    "ajv": "^6.12.3",
     "ajv-keywords": "^3.4.1",
     "codelyzer": "^5.0.1",
     "jasmine-core": "~3.3.0",
